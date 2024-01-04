@@ -1,20 +1,24 @@
 class Solution {
-    public int[] singleNumber(int[] nums) {
-        //brute force approach
-        Map<Integer,Integer> mp =new HashMap<>();
+    public int[] singleNumber(int[] nums) 
+    {
+        int xor=0;
         for(int e:nums)
         {
-            mp.put(e,mp.getOrDefault(e,0)+1);
+            xor^=e;
         }
-        int[] ans = new int[2];
-        int i=0;
-        for(Map.Entry<Integer,Integer> entry:mp.entrySet())
+        int rsb=xor&(-xor);
+        int x=0,y=0;
+        for(int e:nums)
         {
-            if(entry.getValue()==1)
+            if((e&rsb)==0)
             {
-                ans[i++]=entry.getKey();
+                x=x^e;
+            }
+            else
+            {
+                y=y^e;
             }
         }
-        return ans;
+        return new int[]{x,y};
     }
 }
