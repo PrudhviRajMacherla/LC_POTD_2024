@@ -1,20 +1,19 @@
-class Solution {
-    public int f(int idx,int [] nums,int[] dp)
+class Solution
+{
+    public int rob(int[] nums)
     {
-        if(idx==0)
-            return nums[idx];
-        if(idx<0)
-            return 0;
-        if(dp[idx]!=-1)
-            return dp[idx];
-        int take=nums[idx]+f(idx-2,nums,dp);
-        int not_take=f(idx-1,nums,dp);
-        return dp[idx]=Math.max(take,not_take);
-    }
-    public int rob(int[] nums) 
-    {
-        int[] dp = new int[nums.length];
-        Arrays.fill(dp,-1);
-        return f(nums.length-1,nums,dp);
+       int[] dp = new int[nums.length];
+        dp[0]=nums[0];
+        for(int i=1;i<nums.length;i++)
+        {
+            int take=nums[i];
+            if(i-2>=0)
+                take+=dp[i-2];
+            int no_take=0;
+            if(i-1>=0)
+                no_take+=dp[i-1];
+            dp[i]=Math.max(take,no_take);
+        }
+        return dp[nums.length-1];
     }
 }
