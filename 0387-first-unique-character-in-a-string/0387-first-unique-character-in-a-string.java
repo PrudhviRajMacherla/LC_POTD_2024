@@ -1,20 +1,24 @@
 class Solution {
-    public int firstUniqChar(String s) 
-    {
-        int[] alp=new int[26];
-        for(int i=0;i<s.length();i++)
-        {  
-            char ch =s.charAt(i);
-            alp[ch-'a']+=1;
+    public int firstUniqChar(String s) {
+        Map<Character,Integer> mp = new HashMap<>();
+        for(char ch : s.toCharArray())
+        {
+            if(mp.containsKey(ch)){
+                mp.put(ch,mp.get(ch)+1);
+            }
+            else
+            {
+                mp.put(ch,1);
+            }
         }
         for(int i=0;i<s.length();i++)
         {
-            char ch=s.charAt(i);
-            if(alp[ch-'a']==1)
+            if(mp.get(s.charAt(i))==1)
             {
                 return i;
             }
         }
         return -1;
+            
     }
-}
+} 
