@@ -2,10 +2,13 @@ class Solution
 {
     public int rangeBitwiseAnd(int left, int right) 
     {
-       while(right>left)
-       {
-           right=(right&(right-1));
-       }
-        return right;
+      int sc=0;//shift count
+      while(left!=right)
+      {
+          left>>=1;
+          right>>=1;
+          sc++;
+      }
+      return right<<sc;
     }
 }
