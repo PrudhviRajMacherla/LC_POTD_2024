@@ -8,14 +8,8 @@ class Solution
       {
           idx[order.charAt(i)-'a']=i;
       }
-      Comparator<Character> com =new Comparator<Character>()
-      {
-          @Override
-          public int compare(Character ch1,Character ch2)
-          {
-              return idx[ch1-'a']-idx[ch2-'a'];
-          }
-      };
+      Comparator<Character> com =(ch1,ch2)->idx[ch1-'a']-idx[ch2-'a'];
+      
       Character[] ans = new Character[s.length()];
       for(int i=0;i<s.length();i++)
       {
