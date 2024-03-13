@@ -4,20 +4,14 @@
  */
 var pivotInteger = function(n)
 {
+   let lsum=0,tot=n*(n+1)/2;
+    
     for(let i=1;i<=n;i++)
         {
-            let ls=0;
-            let rs=0;
-            for(let j=1;j<=i;j++)
-                {
-                    ls+=j;
-                }
-            for(let j=i;j<=n;j++)
-                {
-                    rs+=j;
-                }
-            if(ls==rs)
+            lsum+=i;
+            if(lsum==tot)
                 return i;
+            tot-=i;
         }
     return -1;
 };
