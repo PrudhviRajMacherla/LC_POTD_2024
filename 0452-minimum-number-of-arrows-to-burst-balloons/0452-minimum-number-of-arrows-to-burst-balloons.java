@@ -10,7 +10,7 @@ class Solution {
        {
            int currStart=points[i][0];
            int currEnd=points[i][1];
-           
+           //we have mentioned here prevStart and prevEnd bcoz we always update prev[0] and prev[1] 
            int prevStart=prev[0];
            int prevEnd=prev[1];
            //non-overlapping
