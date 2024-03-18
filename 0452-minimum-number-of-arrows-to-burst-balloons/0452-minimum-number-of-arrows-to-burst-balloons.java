@@ -1,17 +1,30 @@
 class Solution {
     public int findMinArrowShots(int[][] points)
     {
-        Arrays.sort(points,(a,b)->Integer.compare(a[1],b[1]));
-        int arrows=1;
-        int[] prev=points[0];
-        for(int i=1;i<points.length;i++)
-        {
-            if(points[i][0]>prev[1])
-            {
-                arrows+=1;
-                prev=points[i];
-            }
-        }
-        return arrows;
+       //reference codestory with mik sort them based on starting position
+        Arrays.sort(points,(a,b)->Integer.compare(a[0],b[0]));
+       int arrows=1;
+       int[] prev = points[0];
+ 
+       for(int i=1;i<points.length;i++)
+       {
+           int currStart=points[i][0];
+           int currEnd=points[i][1];
+           
+           int prevStart=prev[0];
+           int prevEnd=prev[1];
+           //non-overlapping
+           if(currStart>prevEnd)
+           {
+               arrows+=1;
+               prev=points[i];
+           }//over-lapping
+           else
+           {
+              prev[0]=Math.max(currStart,prevStart);
+              prev[1]=Math.min(currEnd,prevEnd);
+           }
+       }
+       return arrows;
     }
 }
