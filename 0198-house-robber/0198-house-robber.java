@@ -1,19 +1,25 @@
-class Solution
-{
-    public int rob(int[] nums)
+class Solution {
+    public int max_rob(int[] nums,int idx,int[] dp)
     {
-       int[] dp = new int[nums.length];
-        dp[0]=nums[0];
-        for(int i=1;i<nums.length;i++)
+       
+        if(idx==0)
+            return nums[idx];
+        if(idx<0)
         {
-            int take=nums[i];
-            if(i-2>=0)
-                take+=dp[i-2];
-            int no_take=0;
-            if(i-1>=0)
-                no_take+=dp[i-1];
-            dp[i]=Math.max(take,no_take);
+            return 0;
         }
-        return dp[nums.length-1];
+         if(dp[idx]!=-1)
+            return dp[idx];
+        int pick=nums[idx]+max_rob(nums,idx-2,dp);
+        int not_pick=max_rob(nums,idx-1,dp);
+        return dp[idx]=Math.max(pick,not_pick);
+    }
+    public int rob(int[] nums) 
+    {
+        int n = nums.length-1;
+        int[] dp = new int[n+1];
+        Arrays.fill(dp,-1);
+        int ans = max_rob(nums,n,dp);
+        return ans;
     }
 }
